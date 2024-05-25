@@ -1,0 +1,15 @@
+<div class= "container">
+  <div class= "row no-gutters">
+    <% @reviews.each do |review| %>
+      <div class="col-sm-3">
+        <%=review.bakery.shop_name%>
+      </div>
+      <div class="col-sm-5">
+        <%=review.comment %>
+      </div>
+      <div class="col-sm-2">
+        <%= render 'public/reviews/favorite', review: review, favorite: @favorite %>
+      </div>
+    <% end %>
+</div>
+  </div>

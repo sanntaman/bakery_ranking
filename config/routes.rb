@@ -1,3 +1,31 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+    sessions: 'admin/sessions'
+  }
+ 
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+    resources :users, only: [:destroy]
+    resources :bakeries, only: [:index, :create, :new, :destroy]
+  end
+  
+  namespace :admin do
+    get 'reviews', to: 'reviews#index'
+    resources :reviews, only: [:destroy]
+  end
+  
+  
+  root to: "public/homes#top"
+  devise_for :users
+  scope module: :public do
+    resources :users, only: [:edit, :index, :show, :update]
+    resources :reviews, only: [:create, :edit, :update, :destroy, :index, :show] do
+      collection do
+        get :search
+      end
+      resource :favorite, only: [:create, :destroy]
+    end
+    resources :rankings, only: [:index]
+  end
 end

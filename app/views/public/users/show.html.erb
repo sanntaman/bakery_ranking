@@ -1,0 +1,23 @@
+<div class= "container">
+  <div class= "row no-gutters">
+    <% @reviews.each do |review|%>
+      <div class="col-sm-2" >
+        <%= image_tag review.get_image(100,100) %>
+      </div>
+      <div class="col-sm-2" >
+        <%= review.bakery.shop_name %>
+      </div>
+      <div class="col-sm-4" >
+        <%= review.comment %>
+      </div>
+      <div class="col-sm-2" >
+        <%= render 'public/reviews/favorite', review: review %>
+      </div>
+      <div class="col-sm-2" >
+        <% if review.user == current_user %>
+          <%= link_to "投稿編集", edit_review_path(review.id) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

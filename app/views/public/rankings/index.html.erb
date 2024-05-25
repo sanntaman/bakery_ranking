@@ -1,0 +1,28 @@
+<div class= "container">
+  <div class= "row">
+    <div class="col-md-3"><%= render 'public/reviews/form', review: @review, bakeries: @bakeries %></div>
+    <div class="col-md-8 offset-md-1"><h1>ランキング</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>順位</th>
+            <th>いいね数</th>
+            <th>コメント</th>
+            <th>店名</th>
+            <th>いいね</th>
+          </tr>
+        </thead>
+        <% @reviews.each_with_index do |review, index| %>
+          <tr>
+            <th><%= index + 1 %></th>
+            <th><%= review.favorites_count %></th>
+            <th><%= review.comment %></th>
+            <th><%= review.bakery.shop_name %></th>
+            <th><%= render 'public/reviews/favorite', review: review %></th>
+            <!-- その他表示したいデータがあれば追加してください -->
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

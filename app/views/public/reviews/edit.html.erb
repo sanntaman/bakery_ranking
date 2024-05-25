@@ -1,0 +1,15 @@
+<h1>投稿編集</h1>
+
+<%= form_with model: @review do |f| %>
+
+  <h4>画像</h4>
+  <%= f.file_field :image, accept: 'image/*' %>
+
+
+  <h4>店名</h4>
+  <%= f.collection_select :bakery_id, @bakeries, :id, :shop_name %>
+  
+  <h4>コメント</h4>
+  <%= f.text_area :comment%>
+  <%= f.submit "再投稿"%>
+<%end%>

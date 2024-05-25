@@ -1,0 +1,50 @@
+<div class= "container">
+  <div class= "row">
+    <div class="col-md-3">
+      <%= render "public/reviews/form", review: @review, bakeries: @bakeries %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <div class="row no-gutters">
+        <div class="col-sm-2">画像</div>
+        <div class="col-sm-2">店名</div>
+        <div class="col-sm-2">コメント</div>
+        <div class="col-sm-2">ニックネーム</div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-sm-2">
+          <%= image_tag @current_review.get_image(100,100) %>
+        </div>
+        <div class="col-sm-2">
+          <%= @current_review.bakery.shop_name %>
+        </div>
+        <div class="col-sm-2">
+          <%= @current_review.comment %>
+        </div>
+        <div class="col-sm-2">
+          <%= @current_review.user.name %>
+        </div>
+        <div class="col-sm-2">
+          <%= render "public/reviews/favorite", review: @current_review %>
+        </div>
+        <div id="show_star-<%= @current_review.id %>"></div>
+        <script>
+            var elem = document.querySelector('#show_star-<%= @current_review.id %>');
+            var opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                readOnly: true,
+                score: <%= @current_review.evaluate %>
+            };
+            raty(elem,opt);
+        </script>
+        <div class="col-sm-2">
+          <% if @current_review.user == current_user %>
+            <%= link_to "削除", review_path(@current_review), method: :delete %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

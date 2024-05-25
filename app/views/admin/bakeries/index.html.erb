@@ -1,0 +1,13 @@
+<% @bakeries.each do |bakery| %>
+  <%= bakery.shop_name%>
+  
+  <%= link_to '削除', admin_bakery_path(bakery), method: :delete, data: { confirm: '本当に削除しますか？' } %> 
+  
+<% end %>
+
+
+<%= form_with( model: @bakery, url: admin_bakeries_path ) do |f| %>
+  <%= f.text_field :shop_name %>
+  
+  <%= f.submit "create" %>
+<% end %>
