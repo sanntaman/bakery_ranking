@@ -1,4 +1,5 @@
    class Admin::BakeriesController < ApplicationController
+     before_action :authenticate_admin!
       layout 'admin'
      def index
       @bakeries = Bakery.all

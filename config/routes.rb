@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   end
   
   
-  root to: "public/homes#top"
   devise_for :users
+  root to: "public/homes#top"
   scope module: :public do
     resources :users, only: [:edit, :index, :show, :update]
     resources :reviews, only: [:create, :edit, :update, :destroy, :index, :show] do
