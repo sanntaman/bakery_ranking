@@ -1,4 +1,5 @@
 class Public::ReviewsController < ApplicationController
+  before_action :authenticate_user! 
   def index
     @review = Review.new
     @reviews = Review.all
