@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   end
   
   
-  devise_for :users
+  devise_for :users, :controllers => {
+    :registrations => 'public/registrations'
+  }
   root to: "public/homes#top"
   scope module: :public do
     resources :users, only: [:edit, :index, :show, :update]
