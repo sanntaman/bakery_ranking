@@ -3,16 +3,19 @@
     <div class="col-md-3">
       <%= render 'public/reviews/form', review: @review, bakeries: @bakeries %>
     </div>
-    <div class="col-md-8 offset-md-1">
-      <div class="row no-gutters" >
+    <div class="col-md-9">
+      <!--sp-->
+      <div class="row no-gutters d-block d-md-none" >
         <div class="col-sm-2" >画像</div>
         <div class="col-sm-2" >店名</div>
         <div class="col-sm-2" >コメント</div>
         <div class="col-sm-2" >ニックネーム</div>
+        <div class="col-sm-1" ></div>
         <div class="col-sm-2" ></div>
-        <div class="col-sm-2" ></div>
+        <div class="col-sm-1"></div>
       </div>
-      <div class="row no-gutters">
+      
+      <div class="row no-gutters d-block d-md-none">
         <% @reviews.each do |review| %>
           <div class="col-sm-2">
             <%= image_tag review.get_image(100,100) %>
@@ -26,12 +29,15 @@
           <div class="col-sm-2">
             <%= review.user.name %>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-1">
             <%= render "public/reviews/favorite", review: review %>
           </div>
-          <div id="show_star-<%= review.id %>"></div>
+          <div class="col-sm-2">
+            <div id="show_star-sp-<%= review.id %>"></div>
+          </div>
+          
           <script>
-              var elem = document.querySelector('#show_star-<%= review.id %>');
+              var elem = document.querySelector('#show_star-sp-<%= review.id %>');
               var opt = {
                   starOn: "<%= asset_path('star-on.png') %>",
                   starOff: "<%= asset_path('star-off.png') %>",
@@ -40,13 +46,59 @@
               };
               raty(elem,opt);
           </script>
-          <div class="col-sm-2">
+          <div class="col-sm-1">
             <% if review.user == current_user %>
               <%= link_to "削除", review_path(review), method: :delete %>
             <% end %>
           </div>
         <% end %>
       </div>
+      <!--sp-->
+      <!--pc-->
+      <table class="table table-striped d-none d-md-block">
+        <thead>
+          <tr>
+            <th>画像</th>
+            <th>店名</th>
+            <th>コメント</th>
+            <th>ニックネーム</th>
+            <th></th>
+            <th width="165"></th>
+            <th></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td><%= image_tag review.get_image(100,100) %></td>
+              <td><%= review.bakery.shop_name %></td>
+              <td><%= review.comment %></td>
+              <td><%= review.user.name %></td>
+              <td><%= render "public/reviews/favorite", review: review %></td>
+              <td>
+                <div id="show_star-<%= review.id %>"></div>
+                <script>
+                  var elem = document.querySelector('#show_star-<%= review.id %>');
+                  var opt = {
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      readOnly: true,
+                      score: <%= review.evaluate %>
+                  };
+                  raty(elem,opt);
+                </script>
+              </td>
+              <td>
+                <% if review.user == current_user %>
+                  <%= link_to "削除", review_path(review), method: :delete %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <!--pc-->
     </div>
   </div>
 </div>
