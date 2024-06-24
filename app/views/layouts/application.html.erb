@@ -12,9 +12,11 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-white">
         <div class="container">
-          <%= link_to 'BakeryRanking', reviews_path, class:"navbar-brand" %>
+          <%= link_to reviews_path, class:"navbar-brand" do %>
+            <%= image_tag 'bakeryranking.png', size:"70x70" %>
+          <% end %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,16 +24,16 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
                 </li>
                 <li>
-                  <%= link_to "マイページ", user_path(current_user.id) %>
+                  <%= link_to "マイページ", user_path(current_user.id), class: "btn btn-warning" %>
                 </li>
                 <li>
-                  <%= link_to "ランキング", rankings_path %>
+                  <%= link_to "ランキング", rankings_path, class: "btn btn-info" %>
                 </li>
                 <li>
-                  <%= link_to "投稿一覧", reviews_path(@reviews)%>
+                  <%= link_to "投稿一覧", reviews_path, class: "btn btn-success" %>
                 </li>
                 <%= form_with( url: search_reviews_path, method: 'get') do |f| %>
                   <%= f.search_field :keyword, value: params[:keyword] %>

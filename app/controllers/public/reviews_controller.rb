@@ -2,7 +2,7 @@ class Public::ReviewsController < ApplicationController
   before_action :authenticate_user! 
   def index
     @review = Review.new
-    @reviews = Review.all
+    @reviews = Review.all.page(params[:page])
     @bakeries = Bakery.all
   end
   
@@ -31,6 +31,9 @@ class Public::ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
+    unless @review.user.id == current_user.id
+      redirect_to reviews_path
+    end
     @bakeries = Bakery.all
   end
   

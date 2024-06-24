@@ -1,9 +1,15 @@
 <div class= "container">
   <div class= "row">
-    <div class="mx-auto" style="width: 200px; margin-top: 200px;">
-      <h4><%= link_to "ログイン", new_user_session_path %></h4>
-      <br>
-      <h4 class="mt-4"><%= link_to "新規登録", new_user_registration_path %></h4>
+    <div class="top-link-box align-items-center col-sm-12 d-flex flex-column">
+      <div class="center-block">
+        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-primary", method: :post %>
+      </div>
+      <div class="center-block">
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-danger" %>
+      </div>
+      <div class="center-block">
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success" %>
+      </div>
     </div>
   </div>
 </div>
