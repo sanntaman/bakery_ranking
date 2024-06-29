@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -18,22 +19,22 @@
             <%= image_tag 'bakeryranking.png', size:"70x70" %>
           <% end %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon "></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-danger mx-1" %>
                 </li>
                 <li>
-                  <%= link_to "マイページ", user_path(current_user.id), class: "btn btn-warning" %>
+                  <%= link_to "マイページ", user_path(current_user.id), class: "btn btn-warning mx-1" %>
                 </li>
                 <li>
-                  <%= link_to "ランキング", rankings_path, class: "btn btn-info" %>
+                  <%= link_to "ランキング", rankings_path, class: "btn btn-info mx-1" %>
                 </li>
                 <li>
-                  <%= link_to "投稿一覧", reviews_path, class: "btn btn-success" %>
+                  <%= link_to "投稿一覧", reviews_path, class: "btn btn-success mx-1" %>
                 </li>
                 <%= form_with( url: search_reviews_path, method: 'get') do |f| %>
                   <%= f.search_field :keyword, value: params[:keyword] %>

@@ -1,13 +1,18 @@
 <div class= "container">
   <div class= "row">
     <div class="top-link-box align-items-center col-sm-12 d-flex flex-column">
-      <div class="center-block">
+      <div class= "top-box">
+        <div class="top-box2 d-flex justify-content-center align-items-center">
+          <p class="text-white hachi-maru-pop-regular">美味しいパンをシェアしよう</p>
+        </div>
+      </div>
+      <div class="center-block py-2">
         <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-primary", method: :post %>
       </div>
-      <div class="center-block">
+      <div class="center-block py-2">
         <%= link_to "ログイン", new_user_session_path, class: "btn btn-danger" %>
       </div>
-      <div class="center-block">
+      <div class="center-block py-2">
         <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success" %>
       </div>
     </div>
