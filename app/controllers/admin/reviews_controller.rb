@@ -3,7 +3,7 @@ class Admin::ReviewsController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-        @reviews = Review.all
+    @reviews = Review.all
   end
   
   def destroy

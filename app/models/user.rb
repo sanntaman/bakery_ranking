@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-   # Include default devise modules. Others available are:
+  GUEST_USER_EMAIL = "guest@example.com"
+  
+  # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -11,6 +13,12 @@ class User < ApplicationRecord
   
   validates :name, uniqueness: true, length: { minimum:2,maximum:20 }
   
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
   
   def get_image(width, height)
     unless image.attached?
@@ -18,14 +26,5 @@ class User < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     image.variant(resize_to_limit: [width, height]).processed
-  end
-  
-  GUEST_USER_EMAIL = "guest@example.com"
-
-  def self.guest
-    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.name = "guestuser"
-    end
   end
 end
