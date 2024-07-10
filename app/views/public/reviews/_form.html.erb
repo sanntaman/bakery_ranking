@@ -29,8 +29,8 @@
   <%= f.text_area :comment %>
   <div class="form-group position-static">
     <p>評価:</P>
-    <div id="post_raty"></div> <!-- 星を出力するセレクタ -->
-    <% if review.id.nil? %> <!-- 新規投稿か判別 -->
+    <div id="post_raty"></div>
+    <% if review.id.nil? %>
       <script>
           var elem = document.querySelector('#post_raty');
           elem.innerHTML='';
