@@ -54,7 +54,7 @@ class Public::ReviewsController < ApplicationController
       redirect_to request.referrer, status: :see_other
     end
   end
-  
+
   private
 
   def review_params
