@@ -19,6 +19,20 @@
             <th><%= review.comment %></th>
             <th><%= review.bakery.shop_name %></th>
             <th><%= render 'public/reviews/favorite', review: review %></th>
+            <th>
+              <div id="show_star-<%= review.id %>"></div>
+                <script>
+                  var elem = document.querySelector('#show_star-<%= review.id %>');
+                  elem.innerHTML='';
+                  var opt = {
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      readOnly: true,
+                      score: <%= review.evaluate %>
+                  };
+                  raty(elem,opt);
+                </script>
+            </th>
           </tr>
         <% end %>
       </table>
